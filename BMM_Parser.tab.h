@@ -66,7 +66,8 @@
      SEMICOLON = 282,
      COMMA = 283,
      STOP = 284,
-     RETURN = 285
+     RETURN = 285,
+     STRING1 = 286
    };
 #endif
 

@@ -4,20 +4,22 @@
    #include<stdlib.h>
    #include "BMM_Parser.tab.h"
    //{return NEWLINE;}
+   FILE *f1,*f2;
 %}
 %%
 
 
 [ ]         
-"PRINT"           {printf("PRINT\n");return PRINT;}
-"LET"              { printf("LET\n");return LET;}    
-"REM"              { printf("REM\n");return REM;} 
-\+            {printf("op\n"); return PLUS;}
-\-               {printf("op\n"); return MINUS;}
-\/               {printf("op\n"); return DIVIDE;}
-\*               {printf("op\n"); return MULTIPLY;}
-\(               {printf("op\n"); return OPEN_BRACKET;}
-\)               {printf("op\n"); return CLOSE_BRACKET;}
+"PRINT"           {fprintf(f1,"PRINT\n");return PRINT;}
+"LET"              {fprintf(f1,"LET\n");return LET;}    
+"REM"              { fprintf(f1,"REM\n");return REM;} 
+\+            {fprintf(f1,"op\n"); return PLUS;}
+\-               {fprintf(f1,"op\n"); return MINUS;}
+\/               {fprintf(f1,"op\n"); return DIVIDE;}
+\*               {fprintf(f1,"op\n"); return MULTIPLY;}
+\(               {fprintf(f1,"op\n"); return OPEN_BRACKET;}
+\)               {fprintf(f1,"op\n"); return CLOSE_BRACKET;}
+"="             {fprintf(f1,"op\n"); return EQUALS;}
 "<"           return LESS;
 ">"           return BIGGER;
 "<="          return LESSEQ;
@@ -33,10 +35,10 @@
 \,           return COMMA;
 "STOP"       return STOP;
 "RETURN"     return RETURN;
-[A-Z]       { printf("Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
-[0-9]+            {yylval = atoi(yytext) ;printf("NUMBER %d\n",yylval);return NUMBER;}
-[A-Z0-9]+ { printf("STRING\n");yylval = yytext ;return STRING;}
-\".\"          { printf("STRING2\n");yylval = yytext ;return STRING;}
+[A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
+[0-9]+            {yylval = atoi(yytext) ;fprintf(f1,"NUMBER %d\n",yylval);return NUMBER;}
+[A-Z0-9]+ { fprintf(f1,"STRING\n");yylval = yytext ;return STRING;}
+\"(.)*\"          { fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
 
 
 

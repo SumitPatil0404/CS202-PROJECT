@@ -2,16 +2,18 @@
    #include <stdio.h>
    int symbol_table[500];
    extern FILE *yyin;
-%}
+   extern FILE *f1,*f2;
+   
+   %}
 
-%token  PRINT LET REM EQUALS VARIABLE_NAME NUMBER STRING PLUS MINUS DIVIDE MULTIPLY OPEN_BRACKET CLOSE_BRACKET LESS BIGGER LESSEQ BIGEQ IF THEN ELSE WHILE DO AND OR SEMICOLON COMMA STOP RETURN
+%token  PRINT LET REM EQUALS VARIABLE_NAME NUMBER STRING PLUS MINUS DIVIDE MULTIPLY OPEN_BRACKET CLOSE_BRACKET LESS BIGGER LESSEQ BIGEQ IF THEN ELSE WHILE DO AND OR SEMICOLON COMMA STOP RETURN STRING1
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 
 %%
 
 program :
-   stmt program  {printf("0 compile\n");}
+   stmt program  {fprintf(f2,"0 compile\n");}
    | stmt
   ;
 
@@ -48,16 +50,17 @@ expr :
   | OPEN_BRACKET expr CLOSE_BRACKET {printf("46 compile\n"); $$ = $2;}
   ;
 print : 
-  NUMBER PRINT expr1 {printf("2 compile\n"); ;printf("%c = %d\n",$3,symbol_table[$3-'A']); }
+  NUMBER PRINT expr1 {printf("2 compile\n"); }
   |  NUMBER PRINT 
   ;
 
 expr1 : 
      expr
-    | str COMMA expr1 {printf("20 compile\n"); printf("%s\n",$1); printf("%c = %d\n",$3,symbol_table[$3-'A']);}
-    | str SEMICOLON expr1 {printf("20 compile\n"); printf("%s\n",$1); printf("%c = %d\n",$3,symbol_table[$3-'A']);}
-    | expr COMMA expr1 {printf("21 compile\n"); printf("%c = %d\n",$1,symbol_table[$1-'A']);}  
-    | expr SEMICOLON expr1 {printf("22 compile\n"); printf("%c = %d\n",$1,symbol_table[$1-'A']);}   
+    | STRING1 COMMA expr1 {printf("20 compile\n"); }
+    | STRING1 SEMICOLON expr1 {printf("20 compile\n"); }
+    | expr COMMA expr1 {printf("21 compile\n"); }  
+    | expr SEMICOLON expr1 {printf("22 compile\n"); }
+      
     ;  
 comment : NUMBER REM str {printf("3 compile\n"); printf("Comment : %s\n",$3);}
   ;
@@ -78,14 +81,11 @@ str :
 
 
 int main(int argc, char *argv[]) {
+    f1 = fopen("lex.txt", "w");
+    f2 = fopen("yacc.txt", "w");
     yyin = fopen(argv[1], "r");
     yyparse();
     fclose(yyin);
     
 }
 
-#define YYERROR \
-    do { \
-        fprintf(stderr, "Syntax error\n"); \
-        return 1; \
-    } while(0)
