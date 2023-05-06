@@ -1,4 +1,44 @@
+NUMBER 30
+REM
+STRING
+STRING
+NUMBER 25
+REM
+STRING
+NUMBER 10
+LET
+Variable
+op
+NUMBER 8
+NUMBER 25
 PRINT
+Variable
+NUMBER 35
+LET
+Variable
+op
+Variable
+op
+Variable
+NUMBER 40
 PRINT
+Variable
+NUMBER 35
+Variable
+op
+Variable
+op
+Variable
+NUMBER 45
 PRINT
+Variable
+op
+Variable
+Variable
+Variable
+Variable
+NUMBER 20
 PRINT
+STRING2
+NUMBER 10
+NUMBER 50

@@ -1,0 +1,74 @@
+str compile
+
+str compile
+
+comment compile
+
+str compile
+
+comment compile
+
+NUMBER compile  
+ 
+variable_def compile 
+
+VARIABLE compile
+
+expr1  compile
+
+print compile
+
+VARIABLE compile
+
+VARIABLE compile
+
+expr op compile
+
+variable_def compile 
+
+VARIABLE compile
+
+expr1  compile
+
+print compile
+
+VARIABLE compile
+
+VARIABLE compile
+
+expr op compile
+
+Assignment compile
+
+VARIABLE compile
+
+VARIABLE compile
+
+expr op compile
+
+VARIABLE compile
+
+VARIABLE compile
+
+VARIABLE compile
+
+expr1  compile
+
+expr1 COmma compile
+
+expr1 SEMICLON compile
+
+expr1 COmma compile
+
+print compile
+
+NUMBER compile  
+ 
+expr1  compile
+
+expr1 String comma  compile
+
+print compile
+
+stop compile
+

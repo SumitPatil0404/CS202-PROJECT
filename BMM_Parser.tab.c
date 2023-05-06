@@ -1388,139 +1388,146 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 16 ".\\BMM_Parser.y"
-    {printf("0 compile\n");;}
+    {fprintf(f2,"0 compile\n");;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
 #line 32 ".\\BMM_Parser.y"
-    {printf("5 compile\n"); printf("return %d\n",(yyvsp[(3) - (3)]));;}
+    {fprintf(f2,"return compile\n\n"); ;}
     break;
 
   case 11:
 
 /* Line 1455 of yacc.c  */
 #line 35 ".\\BMM_Parser.y"
-    {printf("6 compile\n"); printf("stop\n"); return 0;;}
+    {fprintf(f2,"stop compile\n\n"); return 0;;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
 #line 38 ".\\BMM_Parser.y"
-    { printf("1 compile %d\n",(yyvsp[(5) - (5)])); symbol_table[(yyvsp[(3) - (5)])-'A'] = (yyvsp[(5) - (5)]); ;}
+    { fprintf(f2,"variable_def compile \n\n");;}
     break;
 
   case 13:
 
 /* Line 1455 of yacc.c  */
 #line 41 ".\\BMM_Parser.y"
-    {printf("4 compile\n"); symbol_table[(yyvsp[(2) - (4)])-'A'] = (yyvsp[(4) - (4)]); ;}
+    {fprintf(f2,"Assignment compile\n\n"); ;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
 #line 44 ".\\BMM_Parser.y"
-    {printf("40 compile  \n "); (yyval) = (yyvsp[(1) - (1)]);;}
+    {fprintf(f2,"NUMBER compile  \n \n"); ;}
     break;
 
   case 15:
 
 /* Line 1455 of yacc.c  */
 #line 45 ".\\BMM_Parser.y"
-    {printf("41 compile\n"); (yyval) = symbol_table[(yyvsp[(1) - (1)])-'A'];;}
+    {fprintf(f2,"VARIABLE compile\n\n"); ;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
 #line 46 ".\\BMM_Parser.y"
-    {printf("42 compile\n"); (yyval) = (yyvsp[(1) - (3)]) + (yyvsp[(3) - (3)]);;}
+    {fprintf(f2,"expr op compile\n\n"); ;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
 #line 47 ".\\BMM_Parser.y"
-    {printf("43 compile\n"); (yyval) = (yyvsp[(1) - (3)]) - (yyvsp[(3) - (3)]);;}
+    {fprintf(f2,"expr op compile\n\n"); ;}
     break;
 
   case 18:
 
 /* Line 1455 of yacc.c  */
 #line 48 ".\\BMM_Parser.y"
-    {printf("44 compile\n"); (yyval) = (yyvsp[(1) - (3)]) * (yyvsp[(3) - (3)]);;}
+    {fprintf(f2,"expr op compile\n\n"); ;}
     break;
 
   case 19:
 
 /* Line 1455 of yacc.c  */
 #line 49 ".\\BMM_Parser.y"
-    {printf("45 compile\n"); (yyval) = (yyvsp[(1) - (3)]) / (yyvsp[(3) - (3)]);;}
+    {fprintf(f2,"expr op compile\n\n"); ;}
     break;
 
   case 20:
 
 /* Line 1455 of yacc.c  */
 #line 50 ".\\BMM_Parser.y"
-    {printf("46 compile\n"); (yyval) = (yyvsp[(2) - (3)]);;}
+    {fprintf(f2,"expr op compile\n\n"); ;}
     break;
 
   case 21:
 
 /* Line 1455 of yacc.c  */
 #line 53 ".\\BMM_Parser.y"
-    {printf("2 compile\n"); ;}
+    {fprintf(f2,"print compile\n\n"); ;}
+    break;
+
+  case 23:
+
+/* Line 1455 of yacc.c  */
+#line 58 ".\\BMM_Parser.y"
+    {fprintf(f2,"expr1  compile\n\n"); ;}
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
 #line 59 ".\\BMM_Parser.y"
-    {printf("20 compile\n"); ;}
+    {fprintf(f2,"expr1 String comma  compile\n\n"); ;}
     break;
 
   case 25:
 
 /* Line 1455 of yacc.c  */
 #line 60 ".\\BMM_Parser.y"
-    {printf("20 compile\n"); ;}
+    {fprintf(f2,"expr1 String semicolon compile\n\n"); ;}
     break;
 
   case 26:
 
 /* Line 1455 of yacc.c  */
 #line 61 ".\\BMM_Parser.y"
-    {printf("21 compile\n"); ;}
+    {fprintf(f2,"expr1 COmma compile\n\n"); ;}
     break;
 
   case 27:
 
 /* Line 1455 of yacc.c  */
 #line 62 ".\\BMM_Parser.y"
-    {printf("22 compile\n"); ;}
+    {fprintf(f2,"expr1 SEMICLON compile\n\n"); ;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
 #line 65 ".\\BMM_Parser.y"
-    {printf("3 compile\n"); printf("Comment : %s\n",(yyvsp[(3) - (3)]));;}
+    {fprintf(f2,"comment compile\n\n");;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
 #line 68 ".\\BMM_Parser.y"
-    {printf("30 compile\n"); (yyval) = (yyvsp[(1) - (2)]);;}
+    {fprintf(f2,"str compile\n\n"); (yyval) = (yyvsp[(1) - (2)]);;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1524 "BMM_Parser.tab.c"
+#line 1531 "BMM_Parser.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

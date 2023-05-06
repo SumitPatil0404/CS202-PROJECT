@@ -662,47 +662,47 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 14 ".\\BMM_Scanner.l"
-{ printf("LET\n");return LET;}    
+{fprintf(f1,"LET\n");return LET;}    
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 15 ".\\BMM_Scanner.l"
-{ printf("REM\n");return REM;} 
+{ fprintf(f1,"REM\n");return REM;} 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 16 ".\\BMM_Scanner.l"
-{printf("op\n"); return PLUS;}
+{fprintf(f1,"op\n"); return PLUS;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 17 ".\\BMM_Scanner.l"
-{printf("op\n"); return MINUS;}
+{fprintf(f1,"op\n"); return MINUS;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 18 ".\\BMM_Scanner.l"
-{printf("op\n"); return DIVIDE;}
+{fprintf(f1,"op\n"); return DIVIDE;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 19 ".\\BMM_Scanner.l"
-{printf("op\n"); return MULTIPLY;}
+{fprintf(f1,"op\n"); return MULTIPLY;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 20 ".\\BMM_Scanner.l"
-{printf("op\n"); return OPEN_BRACKET;}
+{fprintf(f1,"op\n"); return OPEN_BRACKET;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 21 ".\\BMM_Scanner.l"
-{printf("op\n"); return CLOSE_BRACKET;}
+{fprintf(f1,"op\n"); return CLOSE_BRACKET;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 22 ".\\BMM_Scanner.l"
-{printf("op\n"); return EQUALS;}
+{fprintf(f1,"op\n"); return EQUALS;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
@@ -782,22 +782,22 @@ return RETURN;
 case 27:
 YY_RULE_SETUP
 #line 38 ".\\BMM_Scanner.l"
-{ printf("Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
+{ fprintf(f1,"Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 39 ".\\BMM_Scanner.l"
-{yylval = atoi(yytext) ;printf("NUMBER %d\n",yylval);return NUMBER;}
+{yylval = atoi(yytext) ;fprintf(f1,"NUMBER %d\n",yylval);return NUMBER;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 40 ".\\BMM_Scanner.l"
-{ printf("STRING\n");yylval = yytext ;return STRING;}
+{ fprintf(f1,"STRING\n");yylval = yytext ;return STRING;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 41 ".\\BMM_Scanner.l"
-{ printf("STRING2\n");yylval = yytext ;return STRING1;}
+{ fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
