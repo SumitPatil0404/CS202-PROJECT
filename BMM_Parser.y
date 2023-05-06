@@ -3,11 +3,11 @@
    #include <stdlib.h>
    int symbol_table[500];
    extern FILE *yyin;
-   extern FILE *f1,*f2;
+   extern FILE *f1,*f2,*f3;
    extern int yylineno;
    extern char *yytext;
    void yyerror(char *s);
-   int a =-1,b=-1;
+   int a =-1;
    %}
 
 %token  PRINT LET REM EQUALS VARIABLE_NAME NUMBER STRING PLUS MINUS DIVIDE MULTIPLY OPEN_BRACKET CLOSE_BRACKET LESS BIGGER LESSEQ BIGEQ IF THEN AND OR SEMICOLON COMMA STOP RETURN STRING1 GOTO GOSUB DIM END INPUT DEF_FN NOTEQUALS FOR NEXT STEP TO DATA NOT XOR POWER HASH PERCENTAGE DOLLAR EXCLAMATION
@@ -23,28 +23,29 @@
 %%
 
 program :
-   stmt program  {fprintf(f2,"0 compile\n");}
-   | stmt   {fprintf(f2,"0 compile\n");}
+   stmt program  
+   | stmt  
   ;
 
 
 
 stmt:
-    variable_def     {if($$>a){ a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | print           {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}    
-    | comment         {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | assignment      {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | stop             {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | return           {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | goto             {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | gosub           {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | dim              {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | end               {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | input               {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | def_fn               {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | if               {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | for                {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
-    | data               {if($$>a){a=$$;}else{yyerror("Wrong LINE NUMBERs");}}
+    variable_def     {if($1>a){ a=$1;}else{yyerror("Wrong LINE NUMBERs");}
+                       if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | print           { if($1>a){ a=$1;}else{yyerror("Wrong LINE NUMBERs");} if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}    
+    | comment         { if($1>a){ a=$1;}else{yyerror("Wrong LINE NUMBERs");} if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | assignment      {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("between 1 and 9999");}}
+    | stop             {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | return           {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | goto             {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | gosub           {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | dim              {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | end               {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | input               {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | def_fn               {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | if               {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | for                {  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
+    | data               {if($1>a){a=$1;}else{yyerror("Wrong LINE NUMBERs");}  if($1<1 || $1>9999){yyerror("Line Number should be in between 1 and 9999");}}
     | error 
     ;
 
@@ -57,6 +58,7 @@ expr:
   | relation_expr {fprintf(f2,"expr compile\n\n"); }
   | logical_expr {fprintf(f2,"expr compile\n\n"); }
   |OPEN_BRACKET expr CLOSE_BRACKET {fprintf(f2,"condition compile\n\n"); }
+  |variable_name OPEN_BRACKET expr CLOSE_BRACKET 
    ;
 relation_expr:
     expr LESS expr {fprintf(f2,"condition compile\n\n"); }
@@ -96,17 +98,29 @@ value:
 
 
 for:
-    NUMBER FOR variable_name EQUALS expr TO expr   next   {fprintf(f2,"for compile\n\n");  $$=$1;}
-    |NUMBER FOR variable_name EQUALS expr TO expr stmt stmt  next   {fprintf(f2,"for compile\n\n");  $$=$1;}
-    |NUMBER FOR variable_name EQUALS expr TO expr stmt stmt stmt next   {fprintf(f2,"for compile\n\n"); $$=$1; }
+    NUMBER FOR variable_name EQUALS expr TO expr  NUMBER NEXT variable_name   {fprintf(f2,"for compile\n\n");  $$=$1; if($3!=$10){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    |NUMBER FOR variable_name EQUALS expr TO expr stmt NUMBER NEXT variable_name   {fprintf(f2,"for compile\n\n");  $$=$1; if($3!=$11){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    |NUMBER FOR variable_name EQUALS expr TO expr stmt stmt  NUMBER NEXT variable_name   {fprintf(f2,"for compile\n\n");  $$=$1;
+    if($3!=$12){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    |NUMBER FOR variable_name EQUALS expr TO expr stmt stmt stmt NUMBER NEXT variable_name   {fprintf(f2,"for compile\n\n"); $$=$1; if($3!=$13){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+  
     
-    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt next  {fprintf(f2,"for compile\n\n");  $$=$1;}
-    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt stmt next  {fprintf(f2,"for compile\n\n"); $$=$1; }
-    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt stmt stmt next  {fprintf(f2,"for compile\n\n"); $$=$1; }
+        | NUMBER FOR variable_name EQUALS expr TO expr STEP expr NUMBER NEXT variable_name  {fprintf(f2,"for compile\n\n");  $$=$1;
+    if($3!=$12==0){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt NUMBER NEXT variable_name  {fprintf(f2,"for compile\n\n");  $$=$1;
+    if($3!=$13==0){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt stmt NUMBER NEXT variable_name  {fprintf(f2,"for compile\n\n"); $$=$1; if($3!=$14){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");}}
+    | NUMBER FOR variable_name EQUALS expr TO expr STEP expr stmt stmt stmt NUMBER NEXT variable_name  {fprintf(f2,"for compile\n\n"); $$=$1;if($3!=$15){
+    yyerror("Wrong For Loop Syntax, Next should be followed by same Variable as followed by FOR");} }
     ; 
-next :
-  NUMBER NEXT variable_name {fprintf(f2,"next compile\n\n"); $$=$1; }
-  ;      
+   
 
 if:
   NUMBER IF relation_expr THEN NUMBER {fprintf(f2,"if compile\n\n");  $$=$1;}
@@ -123,13 +137,15 @@ input :
 
 VAR :
   variable_name {fprintf(f2,"VAR compile\n\n"); }
+  | variable_name OPEN_BRACKET variable_name CLOSE_BRACKET {fprintf(f2,"VAR compile\n\n"); }
   | variable_name OPEN_BRACKET NUMBER CLOSE_BRACKET {fprintf(f2,"VAR compile\n\n"); }
   | variable_name COMMA VAR {fprintf(f2,"VAR compile\n\n"); }
+  | variable_name OPEN_BRACKET variable_name CLOSE_BRACKET COMMA VAR{fprintf(f2,"VAR compile\n\n"); }
   | variable_name OPEN_BRACKET NUMBER CLOSE_BRACKET COMMA VAR{fprintf(f2,"VAR compile\n\n"); }
   
   ;  
 end : 
-  NUMBER END {fprintf(f2,"end compile\n\n");  $$=$1;}
+  NUMBER END {fprintf(f2,"end compile\n\n");  $$=$1; return 0;}
   ;
 dim :
   NUMBER DIM variable_name OPEN_BRACKET NUMBER CLOSE_BRACKET {fprintf(f2,"dim compile\n\n");  $$=$1;}
@@ -145,17 +161,17 @@ return :
   NUMBER RETURN  {fprintf(f2,"return compile\n\n");  $$=$1; }
   ;
 stop : 
-  NUMBER STOP {fprintf(f2,"stop compile\n\n");  $$=$1; return 0;}
+  NUMBER STOP {fprintf(f2,"stop compile\n\n");  $$=$1; }
   ;
 variable_def :
   NUMBER LET variable_name EQUALS expr   { fprintf(f2,"variable_def compile \n\n"); $$=$1;};
   ;
 variable_name :
-  VARIABLE_NAME {fprintf(f2,"variable_name compile\n\n"); }
-  | VARIABLE_NAME HASH {fprintf(f2,"variable_name compile\n\n"); }
-  | VARIABLE_NAME PERCENTAGE {fprintf(f2,"variable_name compile\n\n"); }
-  | VARIABLE_NAME DOLLAR {fprintf(f2,"variable_name compile\n\n"); }
-  | VARIABLE_NAME EXCLAMATION {fprintf(f2,"variable_name compile\n\n"); }
+  VARIABLE_NAME {fprintf(f2,"variable_name compile\n\n"); $$=$1; }
+  | VARIABLE_NAME HASH {fprintf(f2,"variable_name compile\n\n"); $$=$1;}
+  | VARIABLE_NAME PERCENTAGE {fprintf(f2,"variable_name compile\n\n");$$=$1; }
+  | VARIABLE_NAME DOLLAR {fprintf(f2,"variable_name compile\n\n"); $$=$1;}
+  | VARIABLE_NAME EXCLAMATION {fprintf(f2,"variable_name compile\n\n");$$=$1; }
   
   ; 
 assignment :
@@ -184,7 +200,7 @@ comment : NUMBER REM {fprintf(f2,"comment compile\n\n");$$=$1; }
 %%
 
  void yyerror(char *s) {
-  fprintf(stderr, "Line no.%d  %s\n",yylineno, s);
+  fprintf(f3, "Line No. %d  %s\n",yylineno, s);
 
 } 
 
@@ -193,9 +209,13 @@ comment : NUMBER REM {fprintf(f2,"comment compile\n\n");$$=$1; }
 int main(int argc, char *argv[]) {
     f1 = fopen("lex.txt", "w");
     f2 = fopen("yacc.txt", "w");
+    f3 = fopen("errors.txt", "w");
     yyin = fopen(argv[1], "r");
     yyparse();
     fclose(yyin);
+    fclose(f1);
+    fclose(f2);
+    fclose(f3);
     
 }
 

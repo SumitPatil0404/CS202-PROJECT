@@ -4,7 +4,7 @@
    #include<stdlib.h>
    #include "BMM_Parser.tab.h"
    //{return NEWLINE;}
-   FILE *f1,*f2;
+   FILE *f1,*f2,*f3;
    void yyerror(char *s);
 %}
 %option yylineno 
@@ -53,8 +53,9 @@
 "DATA"       return DATA;
 "NOT"        return NOT;
 "XOR"        return XOR;
-[A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = yytext ; return VARIABLE_NAME;}
+[A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
 [0-9]+            {yylval = atoi(yytext) ;fprintf(f1,"NUMBER %d\n",yylval);return NUMBER;}
+[0-9]+\.[0-9]+    {yylval = atof(yytext) ;fprintf(f1,"NUMBER %f\n",yylval);return NUMBER;}
 [A-Z0-9]+ { fprintf(f1,"STRING\n");yylval = yytext ;return STRING;}
 \"(.)*\"          { fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
 
