@@ -6,7 +6,7 @@
    
    %}
 
-%token  PRINT LET REM EQUALS VARIABLE_NAME NUMBER STRING PLUS MINUS DIVIDE MULTIPLY OPEN_BRACKET CLOSE_BRACKET LESS BIGGER LESSEQ BIGEQ IF THEN ELSE WHILE DO AND OR SEMICOLON COMMA STOP RETURN STRING1 GOTO GOSUB DIM END INPUT DEF_FN NOTEQUALS FOR NEXT STEP TO DATA NOT XOR
+%token  PRINT LET REM EQUALS VARIABLE_NAME NUMBER STRING PLUS MINUS DIVIDE MULTIPLY OPEN_BRACKET CLOSE_BRACKET LESS BIGGER LESSEQ BIGEQ IF THEN AND OR SEMICOLON COMMA STOP RETURN STRING1 GOTO GOSUB DIM END INPUT DEF_FN NOTEQUALS FOR NEXT STEP TO DATA NOT XOR POWER
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
 
@@ -78,19 +78,23 @@ relation_expr:
   
 logical_expr :
     expr AND expr {fprintf(f2,"logical compile\n\n"); }
-    | expr OR  expr {fprintf(f2,"logical compile\n\n"); }
-    | NOT  expr {fprintf(f2,"logical compile\n\n"); }
-    |  expr {fprintf(f2,"logical compile\n\n"); }
+    | expr OR expr {fprintf(f2,"logical compile\n\n"); }
+    | NOT expr {fprintf(f2,"logical compile\n\n"); }
+    | expr {fprintf(f2,"logical compile\n\n"); }
     | OPEN_BRACKET expr CLOSE_BRACKET {fprintf(f2,"logical compile\n\n"); }
-    |  expr XOR expr {fprintf(f2,"logical compile\n\n"); }
+    | expr XOR expr {fprintf(f2,"logical compile\n\n"); }
   
     ;
 
- arithmetic_expr : 
-   expr PLUS expr {fprintf(f2,"expr op compile\n\n"); }
+arithmetic_expr : 
+  NUMBER {fprintf(f2,"NUMBER compile  \n \n"); }
+  | VARIABLE_NAME {fprintf(f2,"VARIABLE compile\n\n"); }
+  | expr PLUS expr {fprintf(f2,"expr op compile\n\n"); }
   | expr MINUS expr {fprintf(f2,"expr op compile\n\n"); }
   | expr MULTIPLY expr {fprintf(f2,"expr op compile\n\n"); }
   | expr DIVIDE expr {fprintf(f2,"expr op compile\n\n"); }
+  | expr POWER expr {fprintf(f2,"expr op compile\n\n"); }
+  | MINUS expr {fprintf(f2,"expr compile\n\n"); }
   | OPEN_BRACKET expr CLOSE_BRACKET {fprintf(f2,"expr op compile\n\n"); }
   ;   
 
@@ -142,11 +146,12 @@ print :
   |  NUMBER PRINT 
   ;
 expr:
-     NUMBER {fprintf(f2,"NUMBER compile  \n \n"); }
+   NUMBER {fprintf(f2,"NUMBER compile  \n \n"); }
   | VARIABLE_NAME {fprintf(f2,"VARIABLE compile\n\n"); }
-    | arithmetic_expr {fprintf(f2,"expr compile\n\n"); }
-    | relation_expr {fprintf(f2,"expr compile\n\n"); }
-     |logical_expr {fprintf(f2,"expr compile\n\n"); }
+  | arithmetic_expr {fprintf(f2,"expr compile\n\n"); }
+  | relation_expr {fprintf(f2,"expr compile\n\n"); }
+  | logical_expr {fprintf(f2,"expr compile\n\n"); }
+   ;
 print_expr : 
      expr                 {fprintf(f2,"expr1  compile\n\n"); }
     | STRING1 COMMA print_expr {fprintf(f2,"expr1 String comma  compile\n\n"); }

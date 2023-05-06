@@ -15,6 +15,7 @@
 "REM"              { fprintf(f1,"REM\n");return REM;} 
 \+            {fprintf(f1,"op\n"); return PLUS;}
 \-               {fprintf(f1,"op\n"); return MINUS;}
+\^               {fprintf(f1,"op\n"); return POWER;}
 \/               {fprintf(f1,"op\n"); return DIVIDE;}
 \*               {fprintf(f1,"op\n"); return MULTIPLY;}
 \(               {fprintf(f1,"op\n"); return OPEN_BRACKET;}
