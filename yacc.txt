@@ -1,74 +1,138 @@
-str compile
-
-str compile
+comment compile
 
 comment compile
 
-str compile
+comment compile
 
 comment compile
+
+comment compile
+
+comment compile
+
+comment compile
+
+comment compile
+
+variable_name compile
+
+dim compile
+
+comment compile
+
+comment compile
+
+comment compile
+
+comment compile
+
+variable_name compile
 
 NUMBER compile  
  
 variable_def compile 
 
-VARIABLE compile
+gosub compile
+
+comment compile
+
+STRING compile
 
 expr1  compile
 
 print compile
 
-VARIABLE compile
+variable_name compile
+
+VAR compile
+
+input compile
+
+comment compile
+
+comment compile
+
+variable_name compile
 
 VARIABLE compile
 
-expr op compile
+NUMBER compile  
+ 
+condition compile
 
-variable_def compile 
+if compile
+
+variable_name compile
 
 VARIABLE compile
+
+STRING compile
 
 expr1  compile
-
-print compile
-
-VARIABLE compile
-
-VARIABLE compile
-
-expr op compile
-
-Assignment compile
-
-VARIABLE compile
-
-VARIABLE compile
-
-expr op compile
-
-VARIABLE compile
-
-VARIABLE compile
-
-VARIABLE compile
-
-expr1  compile
-
-expr1 COmma compile
 
 expr1 SEMICLON compile
 
-expr1 COmma compile
-
 print compile
 
-NUMBER compile  
- 
+goto compile
+
+variable_name compile
+
+VARIABLE compile
+
+variable_name compile
+
+VARIABLE compile
+
 expr1  compile
 
-expr1 String comma  compile
+expr1 String semicolon compile
+
+expr1 SEMICLON compile
 
 print compile
+
+comment compile
+
+STRING compile
+
+expr1  compile
+
+print compile
+
+variable_name compile
+
+VAR compile
+
+input compile
+
+variable_name compile
+
+VARIABLE compile
+
+STRING compile
+
+condition compile
+
+if compile
+
+variable_name compile
+
+VARIABLE compile
+
+STRING compile
+
+condition compile
+
+if compile
+
+STRING compile
+
+expr1  compile
+
+print compile
+
+goto compile
 
 stop compile
 

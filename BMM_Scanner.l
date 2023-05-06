@@ -5,14 +5,16 @@
    #include "BMM_Parser.tab.h"
    //{return NEWLINE;}
    FILE *f1,*f2;
+   void yyerror(char *s);
 %}
+%option yylineno 
 %%
 
 
 [ ]         
 "PRINT"           {fprintf(f1,"PRINT\n");return PRINT;}
 "LET"              {fprintf(f1,"LET\n");return LET;}    
-"REM"              { fprintf(f1,"REM\n");return REM;} 
+"REM"[^\n]*              { fprintf(f1,"REM\n");return REM;} 
 \+            {fprintf(f1,"op\n"); return PLUS;}
 \-               {fprintf(f1,"op\n"); return MINUS;}
 \^               {fprintf(f1,"op\n"); return POWER;}
@@ -28,12 +30,13 @@
 ">="          return BIGEQ;
 "IF"          return IF;
 "THEN"        return THEN;
-"ELSE"        return ELSE;
-"WHILE"       return WHILE;
-"DO"          return DO;
 "AND"         return AND;
 "OR"          return OR;
-\;           return SEMICOLON;
+"#"           return HASH;
+"%"           return PERCENTAGE;
+"$"           return DOLLAR;
+"!"           return EXCLAMATION;
+\;          return SEMICOLON;
 \,           return COMMA;
 "STOP"       return STOP;
 "RETURN"     return RETURN;
