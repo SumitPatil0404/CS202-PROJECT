@@ -1,0 +1,496 @@
+Terminals unused in grammar
+
+   LESS
+   BIGGER
+   LESSEQ
+   BIGEQ
+   IF
+   THEN
+   ELSE
+   WHILE
+   DO
+   AND
+   OR
+   TRUE
+   FALSE
+
+
+State 32 conflicts: 4 shift/reduce
+State 33 conflicts: 4 shift/reduce
+State 34 conflicts: 4 shift/reduce
+State 35 conflicts: 4 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: stmt program
+    2        | stmt
+
+    3 stmt: variable_def
+    4     | print
+    5     | comment
+    6     | assignment
+
+    7 variable_def: NUMBER LET VARIABLE_NAME EQUALS expr
+
+    8 assignment: NUMBER VARIABLE_NAME EQUALS expr
+
+    9 expr: NUMBER
+   10     | VARIABLE_NAME
+   11     | expr PLUS expr
+   12     | expr MINUS expr
+   13     | expr MULTIPLY expr
+   14     | expr DIVIDE expr
+   15     | OPEN_BRACKET expr CLOSE_BRACKET
+
+   16 print: NUMBER PRINT VARIABLE_NAME
+
+   17 comment: NUMBER REM str
+
+   18 str: STRING str
+   19    | /* empty */
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+REM (258) 17
+LET (259) 7
+VARIABLE_NAME (260) 7 8 10 16
+EQUALS (261) 7 8
+NUMBER (262) 7 8 9 16 17
+STRING (263) 18
+PRINT (264) 16
+PLUS (265) 11
+MINUS (266) 12
+MULTIPLY (267) 13
+DIVIDE (268) 14
+OPEN_BRACKET (269) 15
+CLOSE_BRACKET (270) 15
+LESS (271)
+BIGGER (272)
+LESSEQ (273)
+BIGEQ (274)
+IF (275)
+THEN (276)
+ELSE (277)
+WHILE (278)
+DO (279)
+AND (280)
+OR (281)
+TRUE (282)
+FALSE (283)
+
+
+Nonterminals, with rules where they appear
+
+$accept (29)
+    on left: 0
+program (30)
+    on left: 1 2, on right: 0 1
+stmt (31)
+    on left: 3 4 5 6, on right: 1 2
+variable_def (32)
+    on left: 7, on right: 3
+assignment (33)
+    on left: 8, on right: 6
+expr (34)
+    on left: 9 10 11 12 13 14 15, on right: 7 8 11 12 13 14 15
+print (35)
+    on left: 16, on right: 4
+comment (36)
+    on left: 17, on right: 5
+str (37)
+    on left: 18 19, on right: 17 18
+
+
+state 0
+
+    0 $accept: . program $end
+
+    NUMBER  shift, and go to state 1
+
+    program       go to state 2
+    stmt          go to state 3
+    variable_def  go to state 4
+    assignment    go to state 5
+    print         go to state 6
+    comment       go to state 7
+
+
+state 1
+
+    7 variable_def: NUMBER . LET VARIABLE_NAME EQUALS expr
+    8 assignment: NUMBER . VARIABLE_NAME EQUALS expr
+   16 print: NUMBER . PRINT VARIABLE_NAME
+   17 comment: NUMBER . REM str
+
+    REM            shift, and go to state 8
+    LET            shift, and go to state 9
+    VARIABLE_NAME  shift, and go to state 10
+    PRINT          shift, and go to state 11
+
+
+state 2
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 12
+
+
+state 3
+
+    1 program: stmt . program
+    2        | stmt .
+
+    NUMBER  shift, and go to state 1
+
+    $default  reduce using rule 2 (program)
+
+    program       go to state 13
+    stmt          go to state 3
+    variable_def  go to state 4
+    assignment    go to state 5
+    print         go to state 6
+    comment       go to state 7
+
+
+state 4
+
+    3 stmt: variable_def .
+
+    $default  reduce using rule 3 (stmt)
+
+
+state 5
+
+    6 stmt: assignment .
+
+    $default  reduce using rule 6 (stmt)
+
+
+state 6
+
+    4 stmt: print .
+
+    $default  reduce using rule 4 (stmt)
+
+
+state 7
+
+    5 stmt: comment .
+
+    $default  reduce using rule 5 (stmt)
+
+
+state 8
+
+   17 comment: NUMBER REM . str
+
+    STRING  shift, and go to state 14
+
+    $default  reduce using rule 19 (str)
+
+    str  go to state 15
+
+
+state 9
+
+    7 variable_def: NUMBER LET . VARIABLE_NAME EQUALS expr
+
+    VARIABLE_NAME  shift, and go to state 16
+
+
+state 10
+
+    8 assignment: NUMBER VARIABLE_NAME . EQUALS expr
+
+    EQUALS  shift, and go to state 17
+
+
+state 11
+
+   16 print: NUMBER PRINT . VARIABLE_NAME
+
+    VARIABLE_NAME  shift, and go to state 18
+
+
+state 12
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+state 13
+
+    1 program: stmt program .
+
+    $default  reduce using rule 1 (program)
+
+
+state 14
+
+   18 str: STRING . str
+
+    STRING  shift, and go to state 14
+
+    $default  reduce using rule 19 (str)
+
+    str  go to state 19
+
+
+state 15
+
+   17 comment: NUMBER REM str .
+
+    $default  reduce using rule 17 (comment)
+
+
+state 16
+
+    7 variable_def: NUMBER LET VARIABLE_NAME . EQUALS expr
+
+    EQUALS  shift, and go to state 20
+
+
+state 17
+
+    8 assignment: NUMBER VARIABLE_NAME EQUALS . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 24
+
+
+state 18
+
+   16 print: NUMBER PRINT VARIABLE_NAME .
+
+    $default  reduce using rule 16 (print)
+
+
+state 19
+
+   18 str: STRING str .
+
+    $default  reduce using rule 18 (str)
+
+
+state 20
+
+    7 variable_def: NUMBER LET VARIABLE_NAME EQUALS . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 25
+
+
+state 21
+
+   10 expr: VARIABLE_NAME .
+
+    $default  reduce using rule 10 (expr)
+
+
+state 22
+
+    9 expr: NUMBER .
+
+    $default  reduce using rule 9 (expr)
+
+
+state 23
+
+   15 expr: OPEN_BRACKET . expr CLOSE_BRACKET
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 26
+
+
+state 24
+
+    8 assignment: NUMBER VARIABLE_NAME EQUALS expr .
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    $default  reduce using rule 8 (assignment)
+
+
+state 25
+
+    7 variable_def: NUMBER LET VARIABLE_NAME EQUALS expr .
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    $default  reduce using rule 7 (variable_def)
+
+
+state 26
+
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+   15     | OPEN_BRACKET expr . CLOSE_BRACKET
+
+    PLUS           shift, and go to state 27
+    MINUS          shift, and go to state 28
+    MULTIPLY       shift, and go to state 29
+    DIVIDE         shift, and go to state 30
+    CLOSE_BRACKET  shift, and go to state 31
+
+
+state 27
+
+   11 expr: expr PLUS . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 32
+
+
+state 28
+
+   12 expr: expr MINUS . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 33
+
+
+state 29
+
+   13 expr: expr MULTIPLY . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 34
+
+
+state 30
+
+   14 expr: expr DIVIDE . expr
+
+    VARIABLE_NAME  shift, and go to state 21
+    NUMBER         shift, and go to state 22
+    OPEN_BRACKET   shift, and go to state 23
+
+    expr  go to state 35
+
+
+state 31
+
+   15 expr: OPEN_BRACKET expr CLOSE_BRACKET .
+
+    $default  reduce using rule 15 (expr)
+
+
+state 32
+
+   11 expr: expr . PLUS expr
+   11     | expr PLUS expr .
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    PLUS      [reduce using rule 11 (expr)]
+    MINUS     [reduce using rule 11 (expr)]
+    MULTIPLY  [reduce using rule 11 (expr)]
+    DIVIDE    [reduce using rule 11 (expr)]
+    $default  reduce using rule 11 (expr)
+
+
+state 33
+
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   12     | expr MINUS expr .
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    PLUS      [reduce using rule 12 (expr)]
+    MINUS     [reduce using rule 12 (expr)]
+    MULTIPLY  [reduce using rule 12 (expr)]
+    DIVIDE    [reduce using rule 12 (expr)]
+    $default  reduce using rule 12 (expr)
+
+
+state 34
+
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   13     | expr MULTIPLY expr .
+   14     | expr . DIVIDE expr
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    PLUS      [reduce using rule 13 (expr)]
+    MINUS     [reduce using rule 13 (expr)]
+    MULTIPLY  [reduce using rule 13 (expr)]
+    DIVIDE    [reduce using rule 13 (expr)]
+    $default  reduce using rule 13 (expr)
+
+
+state 35
+
+   11 expr: expr . PLUS expr
+   12     | expr . MINUS expr
+   13     | expr . MULTIPLY expr
+   14     | expr . DIVIDE expr
+   14     | expr DIVIDE expr .
+
+    PLUS      shift, and go to state 27
+    MINUS     shift, and go to state 28
+    MULTIPLY  shift, and go to state 29
+    DIVIDE    shift, and go to state 30
+
+    PLUS      [reduce using rule 14 (expr)]
+    MINUS     [reduce using rule 14 (expr)]
+    MULTIPLY  [reduce using rule 14 (expr)]
+    DIVIDE    [reduce using rule 14 (expr)]
+    $default  reduce using rule 14 (expr)
