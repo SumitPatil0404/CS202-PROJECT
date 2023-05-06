@@ -20,6 +20,7 @@
 \(               {fprintf(f1,"op\n"); return OPEN_BRACKET;}
 \)               {fprintf(f1,"op\n"); return CLOSE_BRACKET;}
 "="             {fprintf(f1,"op\n"); return EQUALS;}
+"<>"           return NOTEQUALS;
 "<"           return LESS;
 ">"           return BIGGER;
 "<="          return LESSEQ;
@@ -35,7 +36,20 @@
 \,           return COMMA;
 "STOP"       return STOP;
 "RETURN"     return RETURN;
-[A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
+"GOTO"      return GOTO;
+"GOSUB"     return GOSUB;
+"DIM"       return DIM;
+"END"       return END;
+"INPUT"     return INPUT;
+"DEF FN"     return DEF_FN;
+"FOR"        return FOR;
+"NEXT"       {fprintf(f1,"next\n");return NEXT;}
+"TO"         return TO;
+"STEP"       return STEP;
+"DATA"       return DATA;
+"NOT"        return NOT;
+"XOR"        return XOR;
+[A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = yytext ; return VARIABLE_NAME;}
 [0-9]+            {yylval = atoi(yytext) ;fprintf(f1,"NUMBER %d\n",yylval);return NUMBER;}
 [A-Z0-9]+ { fprintf(f1,"STRING\n");yylval = yytext ;return STRING;}
 \"(.)*\"          { fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
