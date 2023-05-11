@@ -1,78 +1,12 @@
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-variable_name compile
-
-dim compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
 variable_name compile
 
 NUMBER compile  
  
-variable_def compile 
-
-gosub compile
-
-comment compile
-
-NUMBER compile  
- 
-expr1  compile
-
-expr1 String semicolon compile
-
-print compile
-
-comment compile
-
-gosub compile
-
-comment compile
+Assignment compile
 
 variable_name compile
 
-VARIABLE compile
-
-NUMBER compile  
- 
-condition compile
-
-if compile
-
 variable_name compile
-
-VARIABLE compile
-
-STRING compile
-
-expr1  compile
-
-expr1 SEMICLON compile
-
-print compile
-
-goto compile
 
 variable_name compile
 
@@ -80,74 +14,6 @@ VARIABLE compile
 
 variable_name compile
 
-VARIABLE compile
-
-expr1  compile
-
-expr1 String semicolon compile
-
-expr1 SEMICLON compile
-
-print compile
-
-comment compile
-
-NUMBER compile  
- 
-expr1  compile
-
-expr1 String semicolon compile
-
-print compile
-
-variable_name compile
-
-VARIABLE compile
-
-STRING compile
-
-condition compile
-
-if compile
-
-variable_name compile
-
-VARIABLE compile
-
-STRING compile
-
-condition compile
-
-if compile
-
-STRING compile
-
-expr1  compile
-
-print compile
-
-goto compile
-
-stop compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-variable_name compile
-
-NUMBER compile  
- 
 variable_name compile
 
 VARIABLE compile
@@ -158,171 +24,21 @@ expr op compile
 
 expr compile
 
-variable_name compile
-
-variable_name compile
-
-VAR compile
-
-input compile
-
-variable_name compile
-
-for compile
-
-return compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-comment compile
-
-variable_name compile
-
-NUMBER compile  
- 
-variable_def compile 
-
-variable_name compile
-
-NUMBER compile  
- 
-variable_name compile
-
-VARIABLE compile
-
-NUMBER compile  
- 
-expr op compile
-
-expr compile
-
-variable_name compile
-
-variable_name compile
-
-VARIABLE compile
-
-variable_name compile
-
-VARIABLE compile
-
 condition compile
 
 if compile
 
 variable_name compile
 
-NUMBER compile  
- 
-variable_def compile 
-
-goto compile
+variable_name compile
 
 variable_name compile
 
-for compile
+VARIABLE compile
 
-return compile
+variable_def compile 
 
-comment compile
+variable_name compile
 
-comment compile
-
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-NUMBER compile  
- 
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-value compile
-
-data compile
-
-comment compile
-
-end compile
+variable_name compile
 

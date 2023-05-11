@@ -36,14 +36,15 @@
 "%"           return PERCENTAGE;
 "$"           return DOLLAR;
 "!"           return EXCLAMATION;
-\;          return SEMICOLON;
-\,           return COMMA;
+";"       return SEMICOLON;
+","           return COMMA;
 "STOP"       return STOP;
 "RETURN"     return RETURN;
 "GOTO"      return GOTO;
 "GOSUB"     return GOSUB;
 "DIM"       return DIM;
-"END"       return END;
+"END"[\n]*([^\n]*)  return END1;
+"END"[\n]*       {fprintf(f1,"old end\n");return END;}
 "INPUT"     return INPUT;
 "DEF FN"     return DEF_FN;
 "FOR"        return FOR;
@@ -56,8 +57,7 @@
 [A-Z][0-9]?       { fprintf(f1,"Variable\n"); yylval = *yytext ; return VARIABLE_NAME;}
 [0-9]+            {yylval = atoi(yytext) ;fprintf(f1,"NUMBER %d\n",yylval);return NUMBER;}
 [0-9]+\.[0-9]+    {yylval = atof(yytext) ;fprintf(f1,"NUMBER %f\n",yylval);return NUMBER;}
-[A-Z0-9]+ { fprintf(f1,"STRING\n");yylval = yytext ;return STRING;}
-\"(.)*\"          { fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
+\"[^\"]*\"          { fprintf(f1,"STRING2\n");yylval = yytext ;return STRING1;}
 
 
 
